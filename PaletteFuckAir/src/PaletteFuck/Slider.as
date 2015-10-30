@@ -74,12 +74,13 @@ package PaletteFuck
 			if (Input.mouseReleased && mSelected == true)
 			{
 				mSelected = false;
-				if(isPercentage)
-					valueLabel.text = String(this.getValue().toFixed(2));
-				else
-					valueLabel.text = String(this.getValue());
+
 				//valueLabel.text = String("xD");
 			}
+			if(isPercentage)
+				valueLabel.text = String(this.getValue().toFixed(2));
+			else
+				valueLabel.text = String(this.getValue());			
 		}
 		
 		public function getValue():Number
@@ -90,6 +91,10 @@ package PaletteFuck
 		public function setValue(val:Number):void
 		{
 			mSlider.x = (val / mMaxValue) * 360;
+			if(isPercentage)
+				valueLabel.text = String(this.getValue().toFixed(2));
+			else
+				valueLabel.text = String(this.getValue());				
 		}
 	}
 
