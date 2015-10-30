@@ -62,6 +62,7 @@ package PaletteFuck
 				{
 					mHighlightColor = Input.mouseX - x;
 				}
+				
 			}
 		}
 	}

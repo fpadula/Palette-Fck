@@ -14,16 +14,18 @@ package PaletteFuck
 	{
 		[Embed(source = "../Slider.png")] private const IMG_SLIDER:Class;
 		
+		public var isPercentage:Boolean;
 		public var mImage:Graphiclist;
 		public var mSlider:Image;
 		public var mSelected:Boolean;
 		public var mMaxValue:int;
 		public var mLabel:Text;
+		public var valueLabel:Text;
 		
-		public function Slider(label:String) 
+		public function Slider(label:String, perc:Boolean) 
 		{
 			mImage = new Graphiclist();
-			
+			isPercentage = perc;
 			mMaxValue = 360;
 			
 			var line:Image = Image.createRect(360, 3, 0x888888, 1.0);
@@ -72,6 +74,11 @@ package PaletteFuck
 			if (Input.mouseReleased && mSelected == true)
 			{
 				mSelected = false;
+				if(isPercentage)
+					valueLabel.text = String(this.getValue().toFixed(2));
+				else
+					valueLabel.text = String(this.getValue());
+				//valueLabel.text = String("xD");
 			}
 		}
 		

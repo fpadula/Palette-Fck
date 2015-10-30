@@ -1,8 +1,10 @@
+
 package PaletteFuck 
 {
+	//import Math;
 	/**
 	 * ...
-	 * @author Nick Heckman
+	 * @author Nick Heckman & Felipe Padula Sanches
 	 */
 	public class ColorConverter 
 	{
@@ -37,7 +39,40 @@ package PaletteFuck
 			return ({r:red, g:grn, b:blu});
 		}
 	
-	
+		public static function rgb2hsl(r:Number, g:Number, b:Number){
+			var hue:Number, saturation:Number, luminance:Number;
+			var rn:Number, gn:Number, bn:Number;
+			var cmax:Number, cmin:Number;
+			var delta:Number;
+			
+			rn = r / 255;
+			gn = g / 255;
+			bn = b / 255;
+			cmax = Math.max(Math.max(rn, gn), bn);
+			cmin = Math.min(Math.min(rn,gn),bn);
+			delta = cmax - cmin;
+			
+			if (delta == 0.0) {
+				hue = 0;
+			}else if (cmax == rn) {
+				hue = (((gn - bn) / delta) % 6) * 60;
+			}else if (cmax == gn) {
+				hue = (((bn - rn) / delta) + 2) * 60;
+			}else {
+				hue = (((rn - gn) / delta) + 4) * 60;
+			}
+			
+			luminance = (cmax + cmin) / 2;
+			
+			if (delta == 0.0) {
+				saturation = 0.0;
+			}else {
+				saturation = delta/(1 - Math.abs(2*luminance - 1));
+			}
+			
+			return ({h:hue, s:saturation, l:luminance});
+  		}
+ 
 		public static function rgb2hsv(red:Number, grn:Number, blu:Number) 
 		{
 			var x:Number, val:Number, f:Number, i:Number, hue:Number, sat:Number, val:Number;
