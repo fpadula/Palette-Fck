@@ -3,9 +3,10 @@ package PaletteFuck
 	import flash.net.FileReference;
 	import flash.filesystem.File;
 	import net.flashpunk.Entity;
+	import flash.text.TextField;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
-	import net.flashpunk.graphics.Text;
+	import net.flashpunk.graphics.Text;	
 	import net.flashpunk.World;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -32,9 +33,11 @@ package PaletteFuck
 		public var mLumSlider:Slider;
 		public var mSatSlider:Slider;
 		
-		public var label1:Text;
+		public var label1:Text;		
 		public var label2:Text;
+		public var label22:Text;
 		public var label3:Text;
+		public var label33:Text;
 		
 		public var mShadowSlider:HueSlider;
 		
@@ -73,14 +76,17 @@ package PaletteFuck
 			//(mBlocks[15][15] as PaletteBlock).mColor.Luminance = 1.0;
 			
 			label1 = new Text("0", 0, 0);			
-			add(new Entity(930, 100, label1));
+			add(new Entity(930, 100, label1));	
 			
 			label2 = new Text("1", 0, 0);			
 			add(new Entity(930, 200, label2));
+			label22 = new Text("1", 0, 0);			
+			add(new Entity(930, 220, label22));
 			
 			label3 = new Text("0", 0, 0);			
-			add(new Entity(930, 300, label3));		
-			
+			add(new Entity(930, 300, label3));												
+			label33 = new Text("0", 0, 0);			
+			add(new Entity(930, 320, label33));															
 			
 			mShadowSlider = new HueSlider(this);
 			mShadowSlider.x = 550;
@@ -98,14 +104,14 @@ package PaletteFuck
 			mSatSlider.x = 550;
 			mSatSlider.y = 200;
 			mSatSlider.valueLabel = label2;
-			mSatSlider.mMaxValue = 1.0;
+			mSatSlider.mMaxValue = 255.0;
 			add(mSatSlider);
 			
 			mLumSlider = new Slider("Luminance",true);
 			mLumSlider.x = 550;
 			mLumSlider.y = 300;
 			mLumSlider.valueLabel = label3;
-			mLumSlider.mMaxValue = 1.0;
+			mLumSlider.mMaxValue = 255.0;
 			add(mLumSlider);
 			
 	
@@ -145,8 +151,10 @@ package PaletteFuck
 							mSelectedBlock = currentBlock;
 							trace(mSelectedBlock.mColor.Hue);
 							mHueSlider.setValue(mSelectedBlock.mColor.Hue);
-							mSatSlider.setValue(mSelectedBlock.mColor.Saturation);
-							mLumSlider.setValue(mSelectedBlock.mColor.Luminance);
+							mSatSlider.setValue(mSelectedBlock.mColor.Saturation * 255);
+							mLumSlider.setValue(mSelectedBlock.mColor.Luminance * 255);
+							label22.text = new String(mSelectedBlock.mColor.Saturation);
+							label33.text = new String(mSelectedBlock.mColor.Luminance);									
 							break;
 						}
 					}
@@ -156,8 +164,10 @@ package PaletteFuck
 			if (Input.mouseDown)
 			{
 				mSelectedBlock.mColor.Hue = mHueSlider.getValue();
-				mSelectedBlock.mColor.Saturation = mSatSlider.getValue();
-				mSelectedBlock.mColor.Luminance = mLumSlider.getValue();
+				mSelectedBlock.mColor.Saturation = mSatSlider.getValue()/ 255;
+				mSelectedBlock.mColor.Luminance = mLumSlider.getValue() / 255;
+				label22.text = new String(mSelectedBlock.mColor.Saturation);
+				label33.text = new String(mSelectedBlock.mColor.Luminance);				
 			}
 			
 			if (Input.pressed(Key.LEFT))
