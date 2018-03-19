@@ -1,4 +1,4 @@
-Palette-Fuck
+Palette-Fuck (GameMaker port)
 ============
 
-Flash based palette generation app for quickly producing high quality palette files.
+GameMaker port for the Palette-Fuck tool. Palette-Fuck is a Flash based palette generation app for quickly producing high quality palette files
