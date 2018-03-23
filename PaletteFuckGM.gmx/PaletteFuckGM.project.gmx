@@ -3,11 +3,246 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <NewExtensions/>
+  <NewExtensions>
+    <extension index="0">extensions\Anima</extension>
+    <extension index="1">extensions\Useful Scripts</extension>
+  </NewExtensions>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_placeholder</sprite>
+    <sprites name="Useful Scripts Sprites">
+      <sprite>sprites\spr_slider_bar</sprite>
+      <sprite>sprites\spr_slider</sprite>
+      <sprite>sprites\spr_roi</sprite>
+    </sprites>
+    <sprite>sprites\spr_text_input_bg</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="Useful Scripts">
+      <scripts name="General">
+        <script>scripts\change_interval.gml</script>
+        <script>scripts\make_colour_hex.gml</script>
+        <script>scripts\convert_digit_hex_dec.gml</script>
+        <script>scripts\max_value_index.gml</script>
+        <script>scripts\create_grid.gml</script>
+        <script>scripts\create_9_slices.gml</script>
+        <script>scripts\create_surface_container.gml</script>
+      </scripts>
+      <scripts name="GUI">
+        <script>scripts\create_button.gml</script>
+        <script>scripts\create_label.gml</script>
+        <script>scripts\create_label_in_world.gml</script>
+        <script>scripts\create_label_in_world_gui.gml</script>
+      </scripts>
+      <scripts name="Camera &amp; View">
+        <script>scripts\follow_object.gml</script>
+        <script>scripts\screen_shake.gml</script>
+        <script>scripts\create_camera.gml</script>
+        <script>scripts\zoom_view.gml</script>
+        <script>scripts\slide_view_port.gml</script>
+      </scripts>
+      <scripts name="Sound">
+        <script>scripts\play_music_with_loop.gml</script>
+      </scripts>
+      <scripts name="Easing">
+        <script>scripts\ease_in_back.gml</script>
+        <script>scripts\ease_in_bounce.gml</script>
+        <script>scripts\ease_in_circ.gml</script>
+        <script>scripts\ease_in_cubic.gml</script>
+        <script>scripts\ease_in_elastic.gml</script>
+        <script>scripts\ease_in_expo.gml</script>
+        <script>scripts\ease_in_quad.gml</script>
+        <script>scripts\ease_in_quart.gml</script>
+        <script>scripts\ease_in_quint.gml</script>
+        <script>scripts\ease_in_sine.gml</script>
+        <script>scripts\ease_inout_back.gml</script>
+        <script>scripts\ease_inout_bounce.gml</script>
+        <script>scripts\ease_inout_circ.gml</script>
+        <script>scripts\ease_inout_cubic.gml</script>
+        <script>scripts\ease_inout_elastic.gml</script>
+        <script>scripts\ease_inout_expo.gml</script>
+        <script>scripts\ease_inout_quad.gml</script>
+        <script>scripts\ease_inout_quart.gml</script>
+        <script>scripts\ease_inout_quint.gml</script>
+        <script>scripts\ease_inout_sine.gml</script>
+        <script>scripts\ease_linear.gml</script>
+        <script>scripts\ease_out_back.gml</script>
+        <script>scripts\ease_out_bounce.gml</script>
+        <script>scripts\ease_out_circ.gml</script>
+        <script>scripts\ease_out_cubic.gml</script>
+        <script>scripts\ease_out_elastic.gml</script>
+        <script>scripts\ease_out_expo.gml</script>
+        <script>scripts\ease_out_quad.gml</script>
+        <script>scripts\ease_out_quart.gml</script>
+        <script>scripts\ease_out_quint.gml</script>
+        <script>scripts\ease_out_sine.gml</script>
+      </scripts>
+      <scripts name="UI toolkit">
+        <scripts name="Panel aux scripts">
+          <script>scripts\create_primitive_rect_corners.gml</script>
+          <script>scripts\create_primitive_rect.gml</script>
+          <script>scripts\create_primitive_rect_top_bot.gml</script>
+          <script>scripts\create_primitive_rect_sides.gml</script>
+        </scripts>
+        <script>scripts\create_panel.gml</script>
+        <script>scripts\create_slider.gml</script>
+      </scripts>
+      <scripts name="Region of interest">
+        <script>scripts\create_roi.gml</script>
+        <script>scripts\add_roi_event.gml</script>
+      </scripts>
+      <scripts name="Text">
+        <script>scripts\string_split.gml</script>
+        <script>scripts\draw_text_special.gml</script>
+        <script>scripts\trim_white_spaces.gml</script>
+        <scripts name="draw_text_script aux funcs">
+          <script>scripts\is_a_close_command.gml</script>
+          <script>scripts\get_opening_command.gml</script>
+        </scripts>
+      </scripts>
+    </scripts>
+    <scripts name="Anima Extension">
+      <scripts name="Animations">
+        <scripts name="Movement and form">
+          <script>scripts\anima_scale_to.gml</script>
+          <script>scripts\anima_scale_by.gml</script>
+          <script>scripts\anima_rotate_to.gml</script>
+          <script>scripts\anima_rotate_by.gml</script>
+          <script>scripts\anima_slide_to.gml</script>
+          <script>scripts\anima_slide_by.gml</script>
+        </scripts>
+        <scripts name="Views">
+          <script>scripts\anima_fill_view.gml</script>
+        </scripts>
+        <scripts name="Color and opacity">
+          <script>scripts\anima_fade_by.gml</script>
+          <script>scripts\anima_fade_to.gml</script>
+        </scripts>
+        <scripts name="Controls">
+          <script>scripts\anima_start.gml</script>
+          <script>scripts\anima_stop.gml</script>
+          <script>scripts\anima_resume.gml</script>
+          <script>scripts\anima_pause.gml</script>
+        </scripts>
+        <scripts name="Events">
+          <script>scripts\anima_add_finish_event.gml</script>
+          <script>scripts\anima_add_start_event.gml</script>
+          <script>scripts\anima_add_timed_event.gml</script>
+        </scripts>
+        <scripts name="Misc">
+          <script>scripts\anima_destroy_after_use.gml</script>
+          <script>scripts\anima_set_target.gml</script>
+          <script>scripts\anima_loop.gml</script>
+          <script>scripts\anima_clone.gml</script>
+        </scripts>
+      </scripts>
+      <scripts name="Helper functions">
+        <scripts name="Easings">
+          <script>scripts\anima_ease_in_back.gml</script>
+          <script>scripts\anima_ease_in_bounce.gml</script>
+          <script>scripts\anima_ease_in_circ.gml</script>
+          <script>scripts\anima_ease_in_cubic.gml</script>
+          <script>scripts\anima_ease_in_elastic.gml</script>
+          <script>scripts\anima_ease_in_expo.gml</script>
+          <script>scripts\anima_ease_in_quad.gml</script>
+          <script>scripts\anima_ease_in_quart.gml</script>
+          <script>scripts\anima_ease_in_quint.gml</script>
+          <script>scripts\anima_ease_in_sine.gml</script>
+          <script>scripts\anima_ease_inout_back.gml</script>
+          <script>scripts\anima_ease_inout_bounce.gml</script>
+          <script>scripts\anima_ease_inout_circ.gml</script>
+          <script>scripts\anima_ease_inout_cubic.gml</script>
+          <script>scripts\anima_ease_inout_elastic.gml</script>
+          <script>scripts\anima_ease_inout_expo.gml</script>
+          <script>scripts\anima_ease_inout_quad.gml</script>
+          <script>scripts\anima_ease_inout_quart.gml</script>
+          <script>scripts\anima_ease_inout_quint.gml</script>
+          <script>scripts\anima_ease_inout_sine.gml</script>
+          <script>scripts\anima_ease_linear.gml</script>
+          <script>scripts\anima_ease_out_back.gml</script>
+          <script>scripts\anima_ease_out_bounce.gml</script>
+          <script>scripts\anima_ease_out_circ.gml</script>
+          <script>scripts\anima_ease_out_cubic.gml</script>
+          <script>scripts\anima_ease_out_elastic.gml</script>
+          <script>scripts\anima_ease_out_expo.gml</script>
+          <script>scripts\anima_ease_out_quad.gml</script>
+          <script>scripts\anima_ease_out_quart.gml</script>
+          <script>scripts\anima_ease_out_quint.gml</script>
+          <script>scripts\anima_ease_out_sine.gml</script>
+        </scripts>
+      </scripts>
+    </scripts>
+    <scripts name="Color Conversion">
+      <script>scripts\hsl_to_rgb.gml</script>
+      <script>scripts\rgb_to_hsl.gml</script>
+    </scripts>
+  </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_input</font>
+  </fonts>
+  <objects name="objects">
+    <object>objects\obj_main</object>
+    <object>objects\obj_grid</object>
+    <object>objects\obj_grid_cell</object>
+    <object>objects\obj_text_input</object>
+    <objects name="Useful Scripts Objects">
+      <objects name="General">
+        <object>objects\obj_9_slices</object>
+        <object>objects\obj_surface_container</object>
+      </objects>
+      <objects name="Buttons and GUI">
+        <object>objects\obj_button</object>
+        <object>objects\obj_procedural_button</object>
+        <object>objects\obj_anchor_to_screen</object>
+        <object>objects\obj_anchor_to_screen_draw_gui</object>
+        <object>objects\obj_label</object>
+        <object>objects\obj_label_in_world</object>
+        <object>objects\obj_label_in_world_gui</object>
+      </objects>
+      <objects name="Camera &amp; View">
+        <object>objects\obj_viewport_slider</object>
+        <object>objects\obj_camera</object>
+        <object>objects\obj_camera_follow</object>
+        <object>objects\obj_screen_shake</object>
+        <object>objects\obj_camera_zooming</object>
+      </objects>
+      <objects name="Sound">
+        <object>objects\obj_play_music_with_loop</object>
+      </objects>
+      <objects name="UI toolkit">
+        <object>objects\obj_panel</object>
+        <object>objects\obj_cast_shadow</object>
+        <object>objects\obj_slider</object>
+        <object>objects\obj_slider_bar</object>
+      </objects>
+      <objects name="Region of interest">
+        <object>objects\obj_roi</object>
+      </objects>
+      <objects name="Text">
+        <object>objects\obj_special_text_drawer</object>
+        <object>objects\obj_special_text_img</object>
+      </objects>
+    </objects>
+    <objects name="Anima Extension">
+      <objects name="Animations">
+        <object>objects\obj_anima_animation</object>
+        <objects name="Movement and form">
+          <object>objects\obj_anima_scale</object>
+          <object>objects\obj_anima_slide</object>
+          <object>objects\obj_anima_rotate</object>
+        </objects>
+        <objects name="Color and opacity">
+          <object>objects\obj_anima_fade</object>
+          <object>objects\obj_anima_fill_view</object>
+        </objects>
+      </objects>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_main</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
