@@ -152,7 +152,7 @@ lum_input.text = string(lum_v);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Populate HEX input HSL inputs
+            <string>/// Populate HEX input from HSL inputs
 event_user(3);
 var color = make_colour_hex(hex_input.text);
 show_debug_message("Color: " + string(color));

@@ -60,6 +60,83 @@ color_to_paint = c_black;
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="17">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Load grid from file
+var file_name = "test.ini";
+
+ini_open(file_name);
+for(i = 0; i &lt; width; i++){
+    for(j = 0; j &lt; height; j++){
+        cells[i, j].r = ini_read_real(string(i) + string(j), 'r', 0);
+        cells[i, j].g = ini_read_real(string(i) + string(j), 'g', 0);
+        cells[i, j].b = ini_read_real(string(i) + string(j), 'b', 0);
+        cells[i, j].h = ini_read_real(string(i) + string(j), 'h', 0);
+        cells[i, j].s = ini_read_real(string(i) + string(j), 's', 0);
+        cells[i, j].l = ini_read_real(string(i) + string(j), 'l', 0);
+        with(cells[i, j]){
+            event_user(1);
+        }
+    }
+}
+ini_close();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Save grid to file
+var file_name = "test.ini";
+
+ini_open(file_name);
+for(i = 0; i &lt; width; i++){
+    for(j = 0; j &lt; height; j++){
+        ini_write_real(string(i) + string(j), 'r', cells[i, j].r );    
+        ini_write_real(string(i) + string(j), 'g', cells[i, j].g );    
+        ini_write_real(string(i) + string(j), 'b', cells[i, j].b );    
+        ini_write_real(string(i) + string(j), 'h', cells[i, j].h );    
+        ini_write_real(string(i) + string(j), 's', cells[i, j].s );    
+        ini_write_real(string(i) + string(j), 'l', cells[i, j].l );                                                    
+    }
+}
+ini_close();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="15">
       <action>
         <libid>1</libid>

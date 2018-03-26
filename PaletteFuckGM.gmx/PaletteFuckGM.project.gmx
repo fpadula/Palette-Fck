@@ -224,6 +224,7 @@
       <object>objects\obj_color_preview</object>
     </objects>
     <objects name="Main Window">
+      <object>objects\obj_hue_bar_selector</object>
       <object>objects\obj_hue_bar</object>
       <object>objects\obj_shadow_hue</object>
       <object>objects\obj_light_hue</object>
