@@ -28,6 +28,47 @@
             <string>fnt = fnt_input;
 text_color = c_black;
 text = "";
+focused = false;
+max_length = 6;
+text_x0 = 42;
+text_y0 = sprite_height/2;
+cursor_x = text_x0;
+cursor_height = 20;
+cursor_width = 1;
+cursor_blink_interval = 0.5;
+blink_on = true;
+
+when_full[0] = noone; // Object to call
+when_full[1] = noone; // Event type
+when_full[2] = noone; // Event number
+
+when_keypress[0] = noone; // Object to call
+when_keypress[1] = noone; // Event type
+when_keypress[2] = noone; // Event number
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>blink_on = !blink_on;
+alarm[0] = cursor_blink_interval * room_speed;
 </string>
           </argument>
         </arguments>
@@ -50,18 +91,65 @@ text = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(keyboard_check_direct(vk_lcontrol) &amp;&amp; keyboard_check(ord('V'))){
-    if clipboard_has_text() {
-        text = clipboard_get_text();
+            <string>if(focused){
+    if(keyboard_check_direct(vk_lcontrol) &amp;&amp; keyboard_check(ord('V'))){
+        if clipboard_has_text() {
+            text = clipboard_get_text();
+            keyboard_string = text;
+        }
+    }
+    else if(keyboard_check_direct(vk_lcontrol) &amp;&amp; keyboard_check(ord('C'))){        
+        clipboard_set_text(text);
+    }
+    else{
+        text = string_copy(keyboard_string, 
+                            min(1,string_length(keyboard_string) - max_length),
+                            min(max_length,string_length(keyboard_string)) );
         keyboard_string = text;
     }
+    if(instance_exists(when_keypress[0])){
+        with(when_keypress[0]){
+            event_perform(other.when_keypress[1], other.when_keypress[2]);
+        }
+    }
+    if (instance_exists(when_full[0]) &amp;&amp; (string_length(text) == max_length)){
+        with(when_full[0]){
+            event_perform(other.when_full[1], other.when_full[2]);
+        }        
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(position_meeting(mouse_x, mouse_y, id)){
+    focused = true;
+    keyboard_string = text;
+    blink_on = false;
+    alarm[0] = 1;
 }
 else{
-    text = string_copy(keyboard_string, 
-                        min(1,string_length(keyboard_string) - 6),
-                        min(6,string_length(keyboard_string)) );
+    focused = false;
+    alarm[0] = -1;
 }
-
 </string>
           </argument>
         </arguments>
@@ -88,7 +176,11 @@ else{
 draw_set_font(fnt);
 draw_set_halign(fa_left);
 draw_set_valign(fa_middle);
-draw_text_colour(x, y + sprite_height/2, text, text_color, text_color, text_color, text_color, image_alpha);
+draw_text_colour(x + text_x0, y + text_y0, text, text_color, text_color, text_color, text_color, image_alpha);
+if(focused &amp;&amp; blink_on){
+    cursor_x = x + text_x0 + string_width(text);
+    draw_line_width_colour(cursor_x, y + text_y0 - cursor_height/2, cursor_x, y + text_y0 + cursor_height/2, cursor_width, text_color, text_color);
+}
 </string>
           </argument>
         </arguments>

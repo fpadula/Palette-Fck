@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cell_size = 48;
+            <string>cell_size = 25;
 line_width = 1;
 line_color = make_colour_hex("202020");
 selected_cell_color = c_white;
@@ -54,6 +54,129 @@ for(i = 0; i &lt; width; i++){
 selected_cell = noone;
 shadow = 360;
 light = 0;
+color_to_paint = c_black;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="15">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Blend color bottom
+if(instance_exists(selected_cell)){
+    blend_direction = 1;
+    event_user(1);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="14">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Generate light to right
+if(instance_exists(selected_cell) &amp;&amp; (selected_cell.col + 1 &lt;= width - 1)){
+    var shadowBlock = cells[selected_cell.col + 1, selected_cell.row];
+    shadowBlock.h = min(selected_cell.h + sign(light - selected_cell.h) * 14, 360);
+    shadowBlock.l = min(selected_cell.l + .14, 1);
+    shadowBlock.s = selected_cell.s;
+    show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
+    with(shadowBlock){
+        event_user(0);
+    }
+    selected_cell = shadowBlock;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Merge top
+if(instance_exists(selected_cell)){
+    blend_direction = -1;
+    event_user(1);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="12">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Generate shadow to left
+if(instance_exists(selected_cell) &amp;&amp; (selected_cell.col - 1 &gt;= 0)){
+    var shadowBlock = cells[selected_cell.col - 1, selected_cell.row];
+    shadowBlock.h = min(selected_cell.h + sign(shadow - selected_cell.h) * 14, 360);
+    shadowBlock.l = max(selected_cell.l - .14, 0);
+    shadowBlock.s = selected_cell.s;
+    show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
+    with(shadowBlock){
+        event_user(0);
+    }
+    selected_cell = shadowBlock;
+}
 </string>
           </argument>
         </arguments>
@@ -145,8 +268,9 @@ show_debug_message("i: " + string(i) + ", height: " + string(height));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(selected_cell)){
-    var col = make_colour_hex(obj_text_input.text);
+            <string>/// Paint selected cell with color
+if(instance_exists(selected_cell)){
+    var col = color_to_paint;
     if(col != noone &amp;&amp; col!= selected_cell.image_blend){
 //        selected_cell.image_blend = col;
 //        show_debug_message("color_get_red(col): " + string(color_get_red(col)) + ", color_get_blue(col): " + string(color_get_blue(col)) + ", color_get_green(col): " + string(color_get_green(col)));
@@ -200,120 +324,6 @@ if(instance_exists(selected_cell)){
     draw_line_width_colour(selected_cell.x + selected_cell.sprite_width, selected_cell.y, selected_cell.x + selected_cell.sprite_width, selected_cell.y + selected_cell.sprite_height, line_width, selected_cell_color, selected_cell_color);       
     draw_line_width_colour(selected_cell.x + selected_cell.sprite_width, selected_cell.y + selected_cell.sprite_height, selected_cell.x, selected_cell.y + selected_cell.sprite_height, line_width, selected_cell_color, selected_cell_color);           
     draw_line_width_colour(selected_cell.x, selected_cell.y + selected_cell.sprite_height, selected_cell.x, selected_cell.y, line_width, selected_cell_color, selected_cell_color);               
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="40">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>blend_direction = 1;
-event_user(1);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="39">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(selected_cell.col + 1 &lt;= width - 1){
-    var shadowBlock = cells[selected_cell.col + 1, selected_cell.row];
-    shadowBlock.h = min(selected_cell.h + sign(light - selected_cell.h) * 14, 360);
-    shadowBlock.l = min(selected_cell.l + .14, 1);
-    shadowBlock.s = selected_cell.s;
-    show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
-    with(shadowBlock){
-        event_user(0);
-    }
-    selected_cell = shadowBlock;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="38">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>blend_direction = -1;
-event_user(1);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="37">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(selected_cell.col - 1 &gt;= 0){
-    var shadowBlock = cells[selected_cell.col - 1, selected_cell.row];
-    shadowBlock.h = min(selected_cell.h + sign(shadow - selected_cell.h) * 14, 360);
-    shadowBlock.l = max(selected_cell.l - .14, 0);
-    shadowBlock.s = selected_cell.s;
-    show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
-    with(shadowBlock){
-        event_user(0);
-    }
-    selected_cell = shadowBlock;
 }
 </string>
           </argument>

@@ -9,13 +9,41 @@
   </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_text_input_bg</sprite>
     <sprite>sprites\spr_placeholder</sprite>
     <sprites name="Useful Scripts Sprites">
       <sprite>sprites\spr_slider_bar</sprite>
       <sprite>sprites\spr_slider</sprite>
       <sprite>sprites\spr_roi</sprite>
     </sprites>
-    <sprite>sprites\spr_text_input_bg</sprite>
+    <sprites name="Current Color">
+      <sprite>sprites\spr_cc_f</sprite>
+      <sprite>sprites\spr_cc_sf</sprite>
+      <sprite>sprites\spr_cc_lr</sprite>
+      <sprite>sprites\spr_cc_mc_t</sprite>
+      <sprite>sprites\spr_cc_mc_b</sprite>
+    </sprites>
+    <sprites name="New Color">
+      <sprite>sprites\spr_nc_f</sprite>
+      <sprite>sprites\spr_nc_rep</sprite>
+    </sprites>
+    <sprites name="* Color">
+      <sprite>sprites\spr_hex_input</sprite>
+      <sprite>sprites\spr_hue_input</sprite>
+      <sprite>sprites\spr_sat_input</sprite>
+      <sprite>sprites\spr_lum_input</sprite>
+      <sprite>sprites\spr_color_preview</sprite>
+    </sprites>
+    <sprites name="Main Window">
+      <sprite>sprites\spr_shadow_hue</sprite>
+      <sprite>sprites\spr_light_hue</sprite>
+      <sprite>sprites\spr_save_pal</sprite>
+      <sprite>sprites\spr_open_pal</sprite>
+      <sprite>sprites\spr_export_pal</sprite>
+      <sprite>sprites\spr_hue_bar</sprite>
+      <sprite>sprites\spr_hue_slider_w</sprite>
+      <sprite>sprites\spr_hue_slider_b</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -25,6 +53,7 @@
         <script>scripts\change_interval.gml</script>
         <script>scripts\make_colour_hex.gml</script>
         <script>scripts\convert_digit_hex_dec.gml</script>
+        <script>scripts\convert_digit_dec_hex.gml</script>
         <script>scripts\max_value_index.gml</script>
         <script>scripts\create_grid.gml</script>
         <script>scripts\create_9_slices.gml</script>
@@ -183,9 +212,36 @@
     <font>fonts\fnt_input</font>
   </fonts>
   <objects name="objects">
+    <objects name="New Color">
+      <object>objects\obj_nc_f</object>
+      <object>objects\obj_nc_rep</object>
+    </objects>
+    <objects name="* Color">
+      <object>objects\obj_hex_input</object>
+      <object>objects\obj_hue_input</object>
+      <object>objects\obj_sat_input</object>
+      <object>objects\obj_lum_input</object>
+      <object>objects\obj_color_preview</object>
+    </objects>
+    <objects name="Main Window">
+      <object>objects\obj_hue_bar</object>
+      <object>objects\obj_shadow_hue</object>
+      <object>objects\obj_light_hue</object>
+      <object>objects\obj_save_pal</object>
+      <object>objects\obj_open_pal</object>
+      <object>objects\obj_export_pal</object>
+    </objects>
+    <objects name="Current Color">
+      <object>objects\obj_cc_f</object>
+      <object>objects\obj_cc_sf</object>
+      <object>objects\obj_cc_lf</object>
+      <object>objects\obj_cc_mc_t</object>
+      <object>objects\obj_cc_mc_b</object>
+    </objects>
     <object>objects\obj_main</object>
     <object>objects\obj_grid</object>
     <object>objects\obj_grid_cell</object>
+    <object>objects\obj_color_frame</object>
     <object>objects\obj_text_input</object>
     <objects name="Useful Scripts Objects">
       <objects name="General">

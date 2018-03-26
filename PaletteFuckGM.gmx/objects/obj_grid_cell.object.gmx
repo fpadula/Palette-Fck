@@ -55,9 +55,6 @@ b = 0;
           <argument>
             <kind>1</kind>
             <string>father.selected_cell = id;
-with(father){
-    event_user(0);
-}
 </string>
           </argument>
         </arguments>

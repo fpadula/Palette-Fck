@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>background_colour = make_colour_hex("202020");
-//background_colour = c_white;
+            <string>//background_colour = make_colour_hex("202020");
+background_colour = c_white;
 </string>
           </argument>
         </arguments>
