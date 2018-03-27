@@ -160,17 +160,7 @@ color_preview.image_blend = color;
 
 var rgb = hsl_to_rgb(real(hue_input.text), real(sat_input.text), real(lum_input.text));
 color_preview.image_blend = make_colour_rgb(rgb[0], rgb[1], rgb[2]);
-var hex_txt;
-
-hex_txt = "";
-hex_txt = hex_txt + convert_digit_dec_hex( floor(rgb[0]/16)) + convert_digit_dec_hex(rgb[0]%16);
-hex_input.text = hex_txt;
-
-hex_txt = hex_txt + convert_digit_dec_hex( floor(rgb[1]/16)) + convert_digit_dec_hex(rgb[1]%16);
-hex_input.text = hex_txt;
-
-hex_txt = hex_txt + convert_digit_dec_hex( floor(rgb[2]/16)) + convert_digit_dec_hex(rgb[2]%16);
-hex_input.text = hex_txt;
+hex_input.text = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
 </string>
           </argument>
         </arguments>

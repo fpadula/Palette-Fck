@@ -26,8 +26,15 @@
           <argument>
             <kind>1</kind>
             <string>with(obj_grid){
-    event_user(6);
+    if(file_name == ""){
+        file_name = working_directory;
+    }
+    file_name = get_save_filename_ext("PaletteFuck palette file (*.pf)|*.pf", "palette", file_name, "Select a file to save to");
+    if(file_name!= ""){
+        event_user(6);
+    }
 }
+//show_debug_message(get_save_filename_ext("screenshot|*.png", "", working_directory, "Save a level here"));
 </string>
           </argument>
         </arguments>

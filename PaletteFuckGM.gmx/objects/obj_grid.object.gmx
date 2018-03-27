@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cell_size = 25;
+            <string>cell_size = 32;
 line_width = 1;
 line_color = make_colour_hex("202020");
 selected_cell_color = c_white;
@@ -55,6 +55,67 @@ selected_cell = noone;
 shadow = 360;
 light = 0;
 color_to_paint = c_black;
+file_name = "";
+export_file_name = "";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="18">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Export grid to file
+//var file_name = "test.ini";
+show_debug_message("Exporting to '" + export_file_name + "'");
+
+var file = file_text_open_write(export_file_name);
+var hex_code = "";
+var name_split, file_extension;
+name_split = string_split(export_file_name, ".");
+file_extension = name_split[array_length_1d(name_split) -1];
+
+if(file_extension == "pal"){
+    file_text_write_string(file, "JASC-PAL");
+    file_text_writeln(file);
+    file_text_write_string(file, "0100");
+    file_text_writeln(file);
+    file_text_write_string(file, "256");
+    file_text_writeln(file);
+    for(j = 0; j &lt; height; j++){
+        for(i = 0; i &lt; width; i++){        
+            file_text_write_string(file, string(cells[i, j].r) + " " + string(cells[i, j].g) + " " + string(cells[i, j].b));
+            file_text_writeln(file);                                                 
+        }
+    }
+}
+else if(file_extension == "css"){
+    file_text_write_string(file, "{");
+    file_text_writeln(file);
+    for(j = 0; j &lt; height; j++){
+        for(i = 0; i &lt; width; i++){ 
+            hex_code = rgb_to_hex(cells[i, j].r, cells[i, j].g, cells[i, j].b);        
+            file_text_write_string(file, "color :#" + hex_code + ";");
+            file_text_writeln(file); 
+        }
+    }
+    file_text_write_string(file, "}");
+}
+file_text_close(file);
 </string>
           </argument>
         </arguments>
@@ -78,8 +139,8 @@ color_to_paint = c_black;
           <argument>
             <kind>1</kind>
             <string>/// Load grid from file
-var file_name = "test.ini";
-
+//var file_name = "test.ini";
+show_debug_message("Loading from '" + file_name + "'");
 ini_open(file_name);
 for(i = 0; i &lt; width; i++){
     for(j = 0; j &lt; height; j++){
@@ -118,8 +179,9 @@ ini_close();
           <argument>
             <kind>1</kind>
             <string>/// Save grid to file
-var file_name = "test.ini";
 
+//file_name = "test.ini";
+show_debug_message("Saving to '" + file_name + "'");
 ini_open(file_name);
 for(i = 0; i &lt; width; i++){
     for(j = 0; j &lt; height; j++){

@@ -206,6 +206,7 @@
     <scripts name="Color Conversion">
       <script>scripts\hsl_to_rgb.gml</script>
       <script>scripts\rgb_to_hsl.gml</script>
+      <script>scripts\rgb_to_hex.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

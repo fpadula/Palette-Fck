@@ -26,9 +26,15 @@
           <argument>
             <kind>1</kind>
             <string>with(obj_grid){
-    event_user(7);
+    if(file_name == ""){
+        file_name = working_directory;
+    }
+    file_name = get_open_filename("PaletteFuck palette file (*.pf)|*.pf", "palette.pf");
+    if(file_name != ""){
+        event_user(7);
+    }
 }
-show_debug_message(get_open_filename("*.ini", ""));
+//show_debug_message(get_open_filename("*.ini", ""));
 </string>
           </argument>
         </arguments>
