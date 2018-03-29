@@ -10,6 +10,10 @@ l = argument[2];
 
 c = (1 - abs(2*l - 1)) * s;
 
+if(h == 360){
+    h = 0;
+}
+
 _h = h/60;
 X = c * (1 - abs((_h mod 2) - 1));
 m = l - c/2;

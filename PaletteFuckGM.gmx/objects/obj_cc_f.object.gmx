@@ -27,25 +27,95 @@
             <kind>1</kind>
             <string>// Creating inputs
 event_inherited();
-color_preview.x = 618;
-color_preview.y = 91;
 
-hex_input.x = 620;
-hex_input.y = 188;
+color_preview.y -= 4; 
+hex_input.y -= 4; 
+hue_input.y -= 4; 
+sat_input.y -= 4; 
+sat_slider.y -= 4; 
+sat_slider.grip.y -= 4; 
 
-hue_input.x = 620;
-hue_input.y = 223;
+lum_input.y -= 8; 
+lum_slider.y -= 8; 
+lum_slider.grip.y -= 8; 
 
-sat_input.x = 620;
-sat_input.y = 256;
+hue_bar.y -= 4; 
+hue_bar.selector.y -= 4; 
+hue_bar.selector.twin.y -= 4; 
 
-lum_input.x = 620;
-lum_input.y = 289;
+sf_btn = instance_create(763, 95, obj_cc_sf);
+lr_btn = instance_create(763, 116, obj_cc_lf);
+ct_btn = instance_create(763, 137, obj_cc_mc_t);
+cb_btn = instance_create(763, 160, obj_cc_mc_b);
 
-sf_btn = instance_create(798, 103, obj_cc_sf);
-lr_btn = instance_create(798, 163, obj_cc_lf);
-ct_btn = instance_create(799, 222, obj_cc_mc_t);
-cb_btn = instance_create(799, 280, obj_cc_mc_b);
+ss_btn = instance_create(935, 96, obj_cc_ss);
+ls_btn = instance_create(935, 117, obj_cc_ls);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="12">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+with(obj_grid){
+    if(instance_exists(selected_cell)){
+        selected_cell.r = colour_get_red(other.color_preview.image_blend);
+        selected_cell.g = colour_get_green(other.color_preview.image_blend);
+        selected_cell.b = colour_get_blue(other.color_preview.image_blend);                
+        with(selected_cell){
+            event_user(1);
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+with(obj_grid){
+    if(instance_exists(selected_cell)){
+        selected_cell.r = colour_get_red(other.color_preview.image_blend);
+        selected_cell.g = colour_get_green(other.color_preview.image_blend);
+        selected_cell.b = colour_get_blue(other.color_preview.image_blend);                
+        with(selected_cell){
+            event_user(1);
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

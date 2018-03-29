@@ -36,5 +36,8 @@ else{
 }
 
 hsl[0] = round(hsl[0]);
+if (hsl[0] < 0){
+    hsl[0] = hsl[0] + 360;
+}
 
 return hsl;

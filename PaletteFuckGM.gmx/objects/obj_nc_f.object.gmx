@@ -27,51 +27,7 @@
             <kind>1</kind>
             <string>// Creating inputs
 event_inherited();
-color_preview.x = 698;
-color_preview.y = 370;
-
-hex_input.x = 700;
-hex_input.y = 467;
-
-hue_input.x = 700;
-hue_input.y = 502;
-
-sat_input.x = 700;
-sat_input.y = 534;
-
-lum_input.x = 700;
-lum_input.y = 568;
-
-replace_btn = instance_create(741, 604, obj_nc_rep);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="12">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>event_inherited();
-with(obj_hue_bar){
-    if(other.hue_input.text != ""){
-        value = real(other.hue_input.text);
-        selector.y = round(change_interval(value, 0, 360, selector.max_y, selector.min_y));
-    }
-}
+replace_btn = instance_create(745, 407, obj_nc_rep);
 </string>
           </argument>
         </arguments>
@@ -97,6 +53,7 @@ with(obj_hue_bar){
             <string>/// Set grid cell color
 with(obj_grid){
     color_to_paint = make_colour_hex(other.hex_input.text)
+    //show_debug_message("HEX Code: " + other.hex_input.text + ", color: " + string(color_to_paint));
     event_user(0);
 }
 </string>

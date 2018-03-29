@@ -32,8 +32,8 @@ selected_cell_color = c_white;
 //line_color = c_white;
 width = sprite_width/cell_size;
 height = sprite_height/cell_size;
-show_debug_message("width: " + string(sprite_width) + ", height: " + string(sprite_height));
-show_debug_message("c width: " + string(width) + ", c height: " + string(height));
+//show_debug_message("width: " + string(sprite_width) + ", height: " + string(sprite_height));
+//show_debug_message("c width: " + string(width) + ", c height: " + string(height));
 has_borders = false;
 i = 0;
 j = 0;
@@ -50,13 +50,76 @@ for(i = 0; i &lt; width; i++){
         cells[i, j].father = id;
     }
 }
-
+//previous_selected_cell = noone;
 selected_cell = noone;
 shadow = 360;
 light = 0;
 color_to_paint = c_black;
 file_name = "";
 export_file_name = "";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="57">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var clicked_on = instance_position( mouse_x, mouse_y, obj_grid_cell );
+if(instance_exists(clicked_on)){
+    var prev_selected = obj_grid.selected_cell;
+    obj_grid.selected_cell = clicked_on;
+    with(obj_grid){
+        event_user(9);
+    }
+    obj_grid.selected_cell = prev_selected;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="19">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Clear selected cell
+if(instance_exists(selected_cell)){
+    selected_cell.image_blend = c_black;
+    selected_cell.h = 0;
+    selected_cell.s = 0;
+    selected_cell.l = 0;
+    selected_cell.r = 0;
+    selected_cell.g = 0;
+    selected_cell.b = 0;
+}    
 </string>
           </argument>
         </arguments>
@@ -245,15 +308,25 @@ if(instance_exists(selected_cell)){
             <kind>1</kind>
             <string>/// Generate light to right
 if(instance_exists(selected_cell) &amp;&amp; (selected_cell.col + 1 &lt;= width - 1)){
+    if(obj_light_panel.go_right){
+        light = 360;
+    }
+    else{
+        light = 0;
+    }
     var shadowBlock = cells[selected_cell.col + 1, selected_cell.row];
     shadowBlock.h = min(selected_cell.h + sign(light - selected_cell.h) * 14, 360);
     shadowBlock.l = min(selected_cell.l + .14, 1);
     shadowBlock.s = selected_cell.s;
-    show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
+    //show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
     with(shadowBlock){
         event_user(0);
     }
     selected_cell = shadowBlock;
+    with(obj_cc_f){
+        color_preview.image_blend = other.selected_cell.image_blend;
+        event_user(4);
+    }
 }
 </string>
           </argument>
@@ -306,15 +379,25 @@ if(instance_exists(selected_cell)){
             <kind>1</kind>
             <string>/// Generate shadow to left
 if(instance_exists(selected_cell) &amp;&amp; (selected_cell.col - 1 &gt;= 0)){
+    if(obj_shadow_panel.go_right){
+        shadow = 360;
+    }
+    else{
+        shadow = 0;
+    }
     var shadowBlock = cells[selected_cell.col - 1, selected_cell.row];
     shadowBlock.h = min(selected_cell.h + sign(shadow - selected_cell.h) * 14, 360);
     shadowBlock.l = max(selected_cell.l - .14, 0);
     shadowBlock.s = selected_cell.s;
-    show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
+    //show_debug_message("h: " + string(shadowBlock.h) + ", s: " + string(shadowBlock.s) + ", l: " + string(shadowBlock.l));
     with(shadowBlock){
         event_user(0);
     }
     selected_cell = shadowBlock;
+    with(obj_cc_f){
+        color_preview.image_blend = other.selected_cell.image_blend;
+        event_user(4);
+    }
 }
 </string>
           </argument>
@@ -382,8 +465,12 @@ if(instance_exists(valid_block)){
         }
     }
     selected_cell = valid_block;
+    with(obj_cc_f){
+        color_preview.image_blend = other.selected_cell.image_blend;
+        event_user(4);
+    }
 }
-show_debug_message("i: " + string(i) + ", height: " + string(height));
+//show_debug_message("i: " + string(i) + ", height: " + string(height));
 
 </string>
           </argument>
@@ -410,9 +497,10 @@ show_debug_message("i: " + string(i) + ", height: " + string(height));
             <string>/// Paint selected cell with color
 if(instance_exists(selected_cell)){
     var col = color_to_paint;
-    if(col != noone &amp;&amp; col!= selected_cell.image_blend){
+//    if(col != noone &amp;&amp; col!= selected_cell.image_blend){
+    //if(col != noone){
 //        selected_cell.image_blend = col;
-//        show_debug_message("color_get_red(col): " + string(color_get_red(col)) + ", color_get_blue(col): " + string(color_get_blue(col)) + ", color_get_green(col): " + string(color_get_green(col)));
+        //show_debug_message("color_get_red(col): " + string(color_get_red(col)) + ", color_get_blue(col): " + string(color_get_blue(col)) + ", color_get_green(col): " + string(color_get_green(col)));
         var hsl = rgb_to_hsl(color_get_red(col), color_get_green(col), color_get_blue(col));
         selected_cell.h = hsl[0];
         selected_cell.s = hsl[1];
@@ -420,8 +508,8 @@ if(instance_exists(selected_cell)){
         with(selected_cell){
             event_user(0);
         }
-//        show_debug_message("Applied -&gt; h: " + string(selected_cell.h) + ", s: " + string(selected_cell.s) + ", l: " + string(selected_cell.l));        
-    }
+        //show_debug_message("Applied -&gt; h: " + string(selected_cell.h) + ", s: " + string(selected_cell.s) + ", l: " + string(selected_cell.l));        
+    //}
 }
 </string>
           </argument>
@@ -464,6 +552,98 @@ if(instance_exists(selected_cell)){
     draw_line_width_colour(selected_cell.x + selected_cell.sprite_width, selected_cell.y + selected_cell.sprite_height, selected_cell.x, selected_cell.y + selected_cell.sprite_height, line_width, selected_cell_color, selected_cell_color);           
     draw_line_width_colour(selected_cell.x, selected_cell.y + selected_cell.sprite_height, selected_cell.x, selected_cell.y, line_width, selected_cell_color, selected_cell_color);               
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="40">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(5);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="39">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(4);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="38">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(3);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="37">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_user(2);
 </string>
           </argument>
         </arguments>

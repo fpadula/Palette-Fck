@@ -27,10 +27,11 @@
             <kind>1</kind>
             <string>twin = noone;
 grab = false;
-max_y = 0;
-min_y = 0;
+max_x = 0;
+min_x = 0;
 line_width = 1;
 line_color = c_black;
+father_frame = noone;
 </string>
           </argument>
         </arguments>
@@ -54,15 +55,17 @@ line_color = c_black;
           <argument>
             <kind>1</kind>
             <string>if(grab){
-    y = clamp(mouse_y, min_y, max_y);
-    hue_value = round(change_interval(y, max_y, min_y, 0, 360));
-    with(obj_nc_f){
-        hue_input.text = string(other.hue_value);
-        event_user(2);
+    x = clamp(mouse_x, min_x, max_x);
+    hue_value = round(change_interval(x, max_x, min_x, 360, 0));
+    if(instance_exists(father_frame)){
+        with(father_frame){
+            hue_input.text = string(other.hue_value);
+            event_user(2);
+        }
     }
 }
 if(instance_exists(twin)){
-    twin.y = y;
+    twin.x = x;
 }
 </string>
           </argument>
@@ -133,7 +136,7 @@ if(instance_exists(twin)){
           <argument>
             <kind>1</kind>
             <string>draw_self();
-draw_line_width_colour(x, y, x + (twin.x - x)/2, y, line_width, line_color, line_color);
+draw_line_width_colour(x, y, x, y + (twin.y - y)/2, line_width, line_color, line_color);
 </string>
           </argument>
         </arguments>
